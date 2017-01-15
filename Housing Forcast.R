@@ -45,7 +45,7 @@ stargazer(mod1, mod2, mod3, type="text", no.space=TRUE, align=TRUE,
 
 #___________ADF tests 
 #plotting the residuals and correlation
-#this test determines the strength of the 
+#this test determines the strength of the linear model
 install.packages("tseries")
 library(tseries)
 library(urca)
@@ -158,17 +158,17 @@ ts.plot(ts_arma_k)
 ts.plot(ts_arma_k, col="red", ylab="",xlab="")
 #ts.plot(ts(housing$TO.HS.To-arma100_k$residuals, start=c(1967,1), end= c(2018,12), frequency=12),col="blue")
 #lines(ts_arma_k, col="red", ylab="",xlab="")
-lines(ts(housing$TO.HS.To-arma100_k$residuals, start=c(1948,1), end= c(2018,12), frequency=12),col="blue")
-lines(ts(housing$TO.HS.To-arma101_k$residuals, start=c(1948,1), end= c(2018,12), frequency=12),col="green")
-lines(ts(housing$TO.HS.To-arma200_k$residuals, start=c(1948,1), end= c(2018,12), frequency=12),col="pink")
-lines(ts(housing$TO.HS.To-arma201_k$residuals, start=c(1948,1), end= c(2018,12), frequency=12),col="dark gray")
+lines(ts(housing$TO.HS.To-arma100_k$residuals, start=c(1948,1), end= c(2011,12), frequency=12),col="blue")
+lines(ts(housing$TO.HS.To-arma101_k$residuals, start=c(1948,1), end= c(2011,12), frequency=12),col="green")
+lines(ts(housing$TO.HS.To-arma200_k$residuals, start=c(1948,1), end= c(2011,12), frequency=12),col="pink")
+lines(ts(housing$TO.HS.To-arma201_k$residuals, start=c(1948,1), end= c(2011,12), frequency=12),col="dark gray")
 
 title(main="Predicted Versus Actual Starts", ylab="Actual & Predicted Starts", ylim=c(0,10000),
       xlab="Years",
       sub = "Predicted and actual starts -- ARIMA models")
 #abline(h=c(seq(1000,5000, by=1000)))
-legend(1994,4500, c("starts","arma100", "arma101", "arma200", "arma201"), lty=c(1),
-       col= c("red","blue", "green", "pink", "dark gray"), cex=.8)
+legend(1990,5000, c("starts","arma100", "arma101", "arma200", "arma201"), lty=c(1),
+       col= c("red","blue", "green", "pink", "dark gray"), cex=1)
 
 #  Test data and prediction
 wts_arma_k <-window(ts_arma_k, start=c(2005,1), end=c(2016,11))
@@ -182,8 +182,8 @@ warma201_k <- window(ts((2*housing$TO.HS.To-arma201_k$residuals), start=c(2005,1
                    #start=c(2012,1), end=c(2018,12))
 
 #ts.plot(wts_arma_k, col="red", ylab="",xlab="",lty=1)
-ts.plot(warma100_k, col="blue", ylab="",xlab="",ylim=c(0,7000), lty=1)
-lines(wts_arma_k,col="red", lty=2)
+ts.plot(warma100_k, col="blue", ylab="",xlab="",ylim=c(0,7000), lty=2)
+lines(wts_arma_k,col="red", lty=1)
 lines(warma101_k,col="dark green",lty=3)
 lines(warma200_k,col="pink",lty=4)
 lines(warma201_k,col="dark gray",lty=5)
@@ -192,19 +192,22 @@ title(main="Predicted Versus Actual Starts", ylab="Actual & Predicted Starts",
       xlab="Years",
       sub = "Predicted and actual starts -- ARIMA models, 2005.01 - 2018.12")
 #abline(h=c(seq(1000,4000, by=1000)))
-legend(2000.7,2800, c("starts","arma100", "arma101", "arma200", "arma201"), lty=c(1:5),
-       col= c("red","blue", "dark green", "pink", "dark gray"), cex=0.8)
+#legend(2014.1,6000, c("starts","arma100", "arma101", "arma200", "arma201"), lty=c(1:5),
+#       col= c("red","blue", "dark green", "pink", "dark gray"), cex=0.8)
+legend(2014.1,6000, c("Recorded Data","Prediction"), lty=c(1:5),
+       col= c("red","blue"), cex=0.8)
 
-#Prediction upto Dec 2018
 
-wts_arma_k_p <-window(ts_arma_k, start=c(2015,1), end=c(2016,11))
-warma100_k_p <- window(ts((4*housing$TO.HS.To-arma100_k$residuals), start=c(2015,1), end= c(2018,12), frequency=12))
+#Prediction upto Dec 2020
 
-warma101_k_p <- window(ts((4*housing$TO.HS.To-arma101_k$residuals), start=c(2015,1), end= c(2018,12), frequency=12))
+wts_arma_k_p <-window(ts_arma_k, start=c(2011,1), end=c(2016,11))
+warma100_k_p <- window(ts((4*housing$TO.HS.To-arma100_k$residuals), start=c(2015,1), end= c(2019,12), frequency=12))
+
+warma101_k_p <- window(ts((4*housing$TO.HS.To-arma101_k$residuals), start=c(2015,1), end= c(2019,12), frequency=12))
 #start=c(2012,1), end=c(2018,12))
-warma200_k_p <- window(ts((4*housing$TO.HS.To-arma200_k$residuals), start=c(2015,1), end= c(2018,12), frequency=12))
+warma200_k_p <- window(ts((4*housing$TO.HS.To-arma200_k$residuals), start=c(2015,1), end= c(2019,12), frequency=12))
 #start=c(2012,1), end=c(2018,12))
-warma201_k_p <- window(ts((4*housing$TO.HS.To-arma201_k$residuals), start=c(2015,1), end= c(2018,12), frequency=12))
+warma201_k_p <- window(ts((4*housing$TO.HS.To-arma201_k$residuals), start=c(2015,1), end= c(2019,12), frequency=12))
 #start=c(2012,1), end=c(2018,12))
 
 #ts.plot(wts_arma_k, col="red", ylab="",xlab="",lty=1)
@@ -214,11 +217,11 @@ lines(warma101_k_p,col="dark green",lty=3)
 lines(warma200_k_p,col="pink",lty=4)
 lines(warma201_k_p,col="dark gray",lty=5)
 
-title(main="Predicted Versus Actual Starts", ylab="Actual & Predicted Starts",
+title(main="Housing Forecast", ylab="No. of Housing starts (Predicted vs Actual)",
       xlab="Years",
       sub = "Predicted and actual starts -- ARIMA models, 2015.01 - 2018.12")
 #abline(h=c(seq(1000,4000, by=1000)))
-legend(2000.7,2800, c("starts","arma100", "arma101", "arma200", "arma201"), lty=c(1:5),
-       col= c("red","blue", "dark green", "pink", "dark gray"), cex=0.8)
-
+legend(2018.5,8000, c("Recorded Data","Prediction graph"), lty=c(1:3),
+       col= c("red","blue", "dark green", "pink", "dark gray"), cex=1)
+abline(v=2017, col=c('dark gray'), lty=2)
 #--------------------------------------------------------------------------------------------
