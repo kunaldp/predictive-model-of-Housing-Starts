@@ -73,7 +73,7 @@ urersTest(res.starts_k, type = c("DF-GLS", "P-test"), model = c("constant"),
 urersTest(res.starts_k, type = c("DF-GLS", "P-test"), model = c("constant", "trend"),
           lag.max = 12)
 
-#mod 2
+#mod 2 - higher magnitude of moving average thanks mod3 - ignored
 urersTest(res.starts_k_2, type = c("DF-GLS", "P-test"), model = c("constant", "trend"),
           lag.max = 12, doplot = TRUE)
 #-------------------------------------------------------------------------
